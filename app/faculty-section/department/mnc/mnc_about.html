@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NIT Hamirpur – Mathematics and computing sciences</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 14px;
+      color: #222;
+      background: #f5f5f5;
+    }
+
+    /* ── TOP ACCESSIBILITY BAR ── */
+    .access-bar {
+      background: #fff;
+      border-bottom: 1px solid #ccc;
+      padding: 4px 12px;
+      font-size: 12px;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .access-bar a {
+      color: #333;
+      text-decoration: none;
+    }
+
+    .access-bar a:hover {
+      text-decoration: underline;
+    }
+
+    .access-bar span {
+      color: #555;
+    }
+
+    .lang-select {
+      margin-left: auto;
+      font-size: 12px;
+      padding: 2px 4px;
+      border: 1px solid #aaa;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: #7a0000;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    /* LOGO */
+    .logo-circle {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid #fff;
+      background: #fff;
+      flex-shrink: 0;
+    }
+
+    .logo-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .institute-name {
+      line-height: 1.4;
+    }
+
+    .institute-name .hindi {
+      font-size: 18px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .institute-name .sub {
+      font-size: 11px;
+      color: #f0c0c0;
+    }
+
+    .institute-name .english {
+      font-size: 16px;
+      font-weight: bold;
+      margin-top: 2px;
+    }
+
+    .institute-name .tagline {
+      font-size: 11px;
+      color: #f0c0c0;
+    }
+
+    .header-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 8px;
+    }
+
+    .social-icons a {
+      width: 28px;
+      height: 28px;
+      border: 1px solid #fff;
+      border-radius: 3px;
+      color: #fff;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-family: Arial, sans-serif;
+    }
+
+    .social-icons a:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+    }
+
+    .search-box input {
+      padding: 4px 8px;
+      font-size: 12px;
+      border: none;
+      border-radius: 2px 0 0 2px;
+      outline: none;
+      width: 160px;
+    }
+
+    .search-box button {
+      background: #fff;
+      border: none;
+      padding: 4px 8px;
+      cursor: pointer;
+      border-radius: 0 2px 2px 0;
+      font-size: 13px;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: #1a3a5c;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      padding: 12px 18px;
+      font-size: 13px;
+      font-family: Arial, sans-serif;
+      display: block;
+      border-right: 1px solid rgba(255,255,255,0.15);
+    }
+
+    nav a:hover {
+      background: rgba(255,255,255,0.15);
+    }
+
+    /* ── MAIN LAYOUT ── */
+    .main-wrap {
+      max-width: 1100px;
+      margin: 18px auto;
+      display: flex;
+      gap: 0;
+      padding: 0 12px;
+    }
+
+    /* ── SIDEBAR ── */
+    aside {
+      width: 200px;
+      flex-shrink: 0;
+    }
+
+    .sidebar-menu {
+      border: 1px solid #ccc;
+      background: #fff;
+    }
+
+    .sidebar-menu .menu-title {
+      background: #1a3a5c;
+      color: #fff;
+      padding: 10px 14px;
+      font-size: 13px;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+    }
+
+    .sidebar-menu a {
+      display: block;
+      padding: 8px 14px;
+      color: #7a0000;
+      text-decoration: none;
+      font-size: 13px;
+      font-family: Arial, sans-serif;
+      border-bottom: 1px solid #eee;
+    }
+
+    .sidebar-menu a:hover {
+      background: #f9f0f0;
+      text-decoration: underline;
+    }
+
+    /* ── CONTENT ── */
+    .content {
+      flex: 1;
+      background: #fff;
+      border: 1px solid #ccc;
+      margin-left: 14px;
+      padding: 24px 28px;
+      min-height: 600px;
+      overflow: hidden;
+    }
+
+    .content h1 {
+      font-size: 22px;
+      font-weight: normal;
+      text-align: center;
+      margin-bottom: 20px;
+      color: #222;
+      font-family: Arial, sans-serif;
+    }
+
+    /* DEPARTMENT IMAGE */
+    .department-image {
+      width: 100%;
+      max-height: 280px;
+      object-fit: cover;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+    }
+
+    /* ── BODY TEXT ── */
+    .content p {
+      text-align: justify;
+      line-height: 1.7;
+      margin-bottom: 16px;
+      font-size: 14px;
+    }
+
+    .content .programmes-heading {
+      font-weight: bold;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .content ul {
+      margin-left: 24px;
+      margin-bottom: 16px;
+    }
+
+    .content ul li {
+    margin-bottom: 6px;
+    line-height: 1.6;
+    font-size: 14px;
+    }
+
+    /* ── PROGRAMMES SECTION ── */
+
+    .programmes-section {
+    margin: 35px 0;
+    }
+
+    .programmes-title {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 28px;
+    color: #222;
+    font-family: Arial, sans-serif;
+    }
+
+    .programmes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    }
+
+    .programme-card {
+    border: 1px solid #ead8d8;
+    padding: 26px 22px;
+    background: #fff;
+    transition: 0.3s ease;
+    }
+
+    .programme-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+    }
+
+    .programme-icon {
+    width: 52px;
+    height: 52px;
+    background: #faf1f1;
+    color: #8b1e1e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    margin-bottom: 22px;
+    }
+
+    .programme-card h3 {
+    color: #7a0000;
+    font-size: 20px;
+    margin-bottom: 14px;
+    font-family: Arial, sans-serif;
+    }
+
+    .programme-card p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #666;
+    text-align: left;
+    }
+        /* ── MISSION & RESEARCH SECTION ── */
+
+    .mission-research-section {
+    display: flex;
+    gap: 42px;
+    margin: 60px 0;
+    align-items: stretch;
+    flex-wrap: wrap;
+    }
+
+    .mission-box {
+    
+    flex: 1;
+    min-width: 320px;
+    }
+
+    .mission-box h2 {
+    font-size: 42px;
+    color: #7a0000;
+    margin-bottom: 24px;
+    font-family: Arial, sans-serif;
+    line-height: 1.2;
+    }
+
+    .mission-box p {
+    font-size: 15px;
+    line-height: 1.9;
+    color: #555;
+    margin-bottom: 28px;
+    
+    }
+
+    .mission-list {
+    list-style: square;
+    padding-left: 24px;
+    }
+
+    .mission-list li {
+    margin-bottom: 16px;
+    font-size: 18px;
+    line-height: 1.7;
+    color: #333;
+    }
+
+    .research-box {
+    flex: 1;
+    min-width: 320px;
+    background: #f8f9fc;
+    border: 1px solid #dfe4f2;
+    padding: 42px;
+    }
+
+    .research-box h2 {
+    font-size: 34px;
+    color: #4d6894;
+    margin-bottom: 30px;
+    font-family: Arial, sans-serif;
+    line-height: 1.3;
+    }
+
+    .research-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 26px;
+    margin-bottom: 40px;
+    }
+
+    .research-grid h3 {
+    color: #4d6894;
+    font-size: 15px;
+    margin-bottom: 8px;
+    font-family: Arial, sans-serif;
+    text-align: left
+    
+    }
+
+    .research-grid p {
+    color: #444;
+    font-size: 14px;
+    line-height: 1.6;
+    text-align: left
+    }
+
+    .research-btn {
+    display: inline-block;
+    background: #7a0000;
+    color: white;
+    text-decoration: none;
+    padding: 18px 34px;
+    border-radius: 6px;
+    font-size: 22px;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    transition: 0.3s ease;
+    }
+
+    .research-btn:hover {
+    background: #5c0000;
+    transform: translateY(-2px);
+    }
+
+    @media (max-width: 900px) {
+    .mission-research-section {
+        flex-direction: column;
+    }
+
+    .research-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .mission-box h2,
+    .research-box h2 {
+        font-size: 30px;
+    }
+    }
+    /* ── FOOTER ── */
+    footer {
+      background: #1a3a5c;
+      color: #ccc;
+      text-align: center;
+      padding: 14px;
+      font-size: 12px;
+      font-family: Arial, sans-serif;
+      margin-top: 24px;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 700px) {
+      .main-wrap {
+        flex-direction: column;
+      }
+
+      aside {
+        width: 100%;
+      }
+
+      .content {
+        margin-left: 0;
+        margin-top: 14px;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .header-right {
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ACCESSIBILITY BAR -->
+  <div class="access-bar">
+    <a href="#">A+</a>
+    <a href="#">A</a>
+    <a href="#">A-</a>
+    <span>|</span>
+    <a href="#">🌙 Toggle Contrast</a>
+    <a href="#">Grey Scale</a>
+    <a href="#">🔗 Links</a>
+    <a href="#">☀️ Light Mode</a>
+    <a href="#">↺ Reset</a>
+    <span>|</span>
+    <a href="#">🏠 Home</a>
+    <a href="#">📋 Intranet</a>
+    <a href="#">✉️ eOffice</a>
+    <a href="#">📞 Directory</a>
+    <a href="#">📬 Contact Us</a>
+    <a href="#">👤 Faculty Portfolio</a>
+
+    <select class="lang-select">
+      <option>English</option>
+      <option>हिन्दी</option>
+    </select>
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-left">
+
+      <!-- LOGO -->
+      <div class="logo-circle">
+        <img src="logo.png" alt="NIT Hamirpur Logo">
+      </div>
+
+      <div class="institute-name">
+        <div class="hindi">राष्ट्रीय प्रौद्योगिकी संस्थान हमीरपुर</div>
+        <div class="sub">(एक राष्ट्रीय महत्व का संस्थान)</div>
+        <div class="english">National Institute of Technology Hamirpur</div>
+        <div class="tagline">(An Institute of National Importance)</div>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <div class="social-icons">
+        <a href="#" title="Facebook">f</a>
+        <a href="#" title="Twitter">𝕏</a>
+        <a href="#" title="LinkedIn">in</a>
+        <a href="#" title="Instagram">📷</a>
+      </div>
+
+      <div class="search-box">
+        <input type="text" placeholder="Search for" />
+        <button>🔍</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <a href="#">About NITH</a>
+    <a href="#">Authorities</a>
+    <a href="#">Administration</a>
+    <a href="#">Departments</a>
+    <a href="#">Academics</a>
+    <a href="#">Student</a>
+    <a href="#">Faculty</a>
+    <a href="#">Alumni</a>
+    <a href="#">Downloads</a>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-wrap">
+
+    <!-- SIDEBAR -->
+    <aside>
+      <div class="sidebar-menu">
+        <div class="menu-title">About Us</div>
+
+        <a href="#">Vision &amp; Mission</a>
+        <a href="#">Faculty</a>
+        <a href="#">Staff</a>
+        <a href="#">Programme Offered</a>
+        <a href="#">Labs</a>
+        <a href="#">Research Publications</a>
+        <a href="#">Contact</a>
+      </div>
+    </aside>
+
+    <!-- PAGE CONTENT -->
+    <div class="content">
+
+      <h1>Computer Science and Engineering</h1>
+
+      <!-- DEPARTMENT IMAGE -->
+      <img
+        src="mnc_dept_pic.jpg"
+        alt="CSE Department Building"
+        class="department-image"
+      >
+
+      <p>
+        The Department of Mathematics & Scientific Computing became independent
+         in 2009 and was earlier part of the Department of Applied 
+         Sciences & Humanities established in 1986. With 12 faculty members specializing
+          in diverse fields, the department focuses on quality education and research,
+           supported by modern facilities and a well-equipped Computational Laboratory.
+
+      </p>
+
+
+      <!-- ACADEMIC PROGRAMMES -->
+<div class="programmes-section">
+
+  <h2 class="programmes-title">Academic Programmes</h2>
+
+  <div class="programmes-grid">
+
+    <div class="programme-card">
+      <div class="programme-icon">🎓</div>
+
+      <h3>B.Tech</h3>
+
+      <p>
+        Four-year undergraduate programme focusing on
+        core foundations and emerging tech trends.
+      </p>
+    </div>
+
+    <div class="programme-card">
+      <div class="programme-icon">📘</div>
+
+
+      <h3>M.Sc</h3>
+
+      <p>
+        a postgraduate programme aimed at equipping students with a strong
+        foundation in advanced mathematics and its computational applications.
+      </p>
+    </div>
+
+    <div class="programme-card">
+      <div class="programme-icon">⚗️</div>
+
+      <h3>Ph.D</h3>
+
+      <p>
+        research opportunities in various specializations of Mathematics 
+        and Statistics, encouraging innovation and scholarly contribution to the field.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+      <!-- MISSION & RESEARCH SECTION -->
+
+<div class="mission-research-section">
+
+  <!-- LEFT SIDE -->
+  <div class="mission-box">
+
+    <h2>Mission &amp; Cognitive Development</h2>
+
+    <p>
+      To generate skilled manpower equipped with human values and the ability to 
+      address mathematical and scientific computing challenges in science and technology 
+      for the welfare of society and national development. The department aims to empower 
+      students through quality education, modern infrastructure, and an updated curriculum
+      , while preparing them for emerging technologies and industry needs. It also focuses
+       on promoting ethical values, leadership, managerial skills, and interdisciplinary
+       learning and research in accordance with NEP 2020.
+    </p>
+
+  </div>
+
+  <!-- RIGHT SIDE -->
+  <div class="research-box">
+
+    <h2>Explore Research Publications</h2>
+
+    <div class="research-grid">
+
+      <div>
+        <h3>Scientific Computing &amp; Numerical Analysis</h3>
+        <p>Research in machine learning and intelligent systems.</p>
+      </div>
+
+      <div>
+        <h3>Cryptography &amp; Network Security</h3>
+        <p>Advanced security protocols and privacy systems.</p>
+      </div>
+
+      <div>
+        <h3>Mathematical Modelling &amp; Simulation</h3>
+        <p>Distributed systems and scalable computing research.</p>
+      </div>
+
+      <div>
+        <h3>Operations Research &amp; Optimization</h3>
+        <p>Smart devices and hardware-software integration.</p>
+      </div>
+
+    </div>
+
+    <a href="research.html" class="research-btn">
+      Explore →
+    </a>
+
+  </div>
+
+</div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    &copy; 2026 All Rights Reserved.
+  </footer>
+
+</body>
+</html>
