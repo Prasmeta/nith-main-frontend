@@ -1,0 +1,28 @@
+<department>
+
+  <title>Department of Computer Science and Engineering</title>
+
+  <info>
+
+    <description>
+      The Department of Computer Science and Engineering focuses on
+      quality education, innovation, and research in modern computing fields.
+    </description>
+
+    <description>
+      The department provides students with strong technical foundations,
+      practical exposure, and interdisciplinary opportunities.
+    </description>
+
+  </info>
+
+  <programme>
+    <name>B.Tech</name>
+    <icon>🎓</icon>
+    <details>
+      Four-year undergraduate programme.
+    </details>
+  </programme>
+
+
+</department>
