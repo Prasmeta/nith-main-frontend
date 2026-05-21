@@ -1,0 +1,136 @@
+.chem-labs-page {
+  min-height: 100vh;
+  background: #f4f4f4;
+  border-top: 5px solid #123a5b;
+  color: #333;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.chem-labs-shell {
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1240px);
+  gap: 36px;
+  align-items: start;
+  max-width: 1650px;
+  margin: 0 auto;
+  padding: 20px 28px 70px;
+}
+
+.chem-labs-sidebar {
+  background: #fff;
+  border-right: 1px solid #ddd;
+  box-shadow: 8px 8px 9px rgba(0, 0, 0, 0.18);
+}
+
+.chem-labs-sidebar a {
+  display: block;
+  padding: 8px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  color: #c0392b;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.chem-labs-sidebar a.active {
+  background: #8b0000;
+  color: #fff;
+  font-weight: 600;
+}
+
+.chem-labs-sidebar a:hover,
+.chem-labs-sidebar a:focus-visible {
+  background: #f6eeee;
+  outline: none;
+}
+
+.chem-labs-sidebar a.active:hover,
+.chem-labs-sidebar a.active:focus-visible {
+  background: #8b0000;
+  color: #fff;
+}
+
+.chem-labs-content {
+  min-height: 820px;
+  padding: 48px 24px 90px;
+  background: #fff;
+  border: 1px solid #d8d8d8;
+  box-shadow: 8px 0 7px rgba(0, 0, 0, 0.2);
+}
+
+.chem-labs-content h1 {
+  margin: 0 0 34px;
+  color: #333;
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.labs-table {
+  width: 100%;
+  max-width: 1170px;
+  margin: 0 auto;
+  border-collapse: collapse;
+  table-layout: fixed;
+  background: #fff;
+}
+
+.labs-table th {
+  padding: 16px 12px;
+  border: 1px solid #d8d8d8;
+  background: #062f45;
+  color: #fff;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.labs-table td {
+  padding: 14px 12px;
+  border: 1px solid #d8d8d8;
+  color: #666;
+  font-size: 21px;
+  line-height: 1.25;
+}
+
+.labs-table th:first-child,
+.labs-table td:first-child {
+  width: 125px;
+  text-align: left;
+}
+
+.labs-table th:last-child {
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .chem-labs-shell {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding: 16px 14px 42px;
+  }
+
+  .chem-labs-sidebar nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .chem-labs-content {
+    min-height: auto;
+    padding: 34px 16px;
+  }
+
+  .chem-labs-content h1 {
+    font-size: 30px;
+  }
+
+  .labs-table {
+    min-width: 720px;
+  }
+
+  .chem-labs-content {
+    overflow-x: auto;
+  }
+}
