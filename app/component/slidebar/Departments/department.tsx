@@ -48,7 +48,7 @@ const departmentData = [
           {
             title: 'Material Science & Engineering',
             title2: 'पदार्थ विज्ञान और इंजीनियरिंग',
-            href: '/faculty-section/department/mnc',
+            href: '/faculty-section/department/msc',
           },
         ],
       },
@@ -67,7 +67,7 @@ const departmentData = [
           {
             title: 'Chemistry',
             title2: 'रसायन विज्ञान',
-            href: '#',
+            href: '/faculty-section/department/chem',
           },
           {
             title: 'Mathematics & Scientific Computing',
@@ -77,7 +77,7 @@ const departmentData = [
           {
             title: 'Physics & Photonics Science',
             title2: 'भौतिकी और फोटोनिक्स विज्ञान',
-            href: '#',
+            href: '/faculty-section/department/phy',
           },
         ],
       },

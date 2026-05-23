@@ -1,0 +1,127 @@
+.phy-programmes-page {
+  min-height: 100vh;
+  background: #f4f4f4;
+  border-top: 5px solid #123a5b;
+  color: #333;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.phy-programmes-shell {
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1240px);
+  gap: 36px;
+  align-items: start;
+  max-width: 1650px;
+  margin: 0 auto;
+  padding: 20px 28px 70px;
+}
+
+.phy-programmes-sidebar {
+  background: #fff;
+  border-right: 1px solid #ddd;
+  box-shadow: 8px 8px 9px rgba(0, 0, 0, 0.18);
+}
+
+.phy-programmes-sidebar a {
+  display: block;
+  padding: 8px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  color: #c0392b;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.phy-programmes-sidebar a.active {
+  background: #8b0000;
+  color: #fff;
+  font-weight: 600;
+}
+
+.phy-programmes-sidebar a:hover,
+.phy-programmes-sidebar a:focus-visible {
+  background: #f6eeee;
+  outline: none;
+}
+
+.phy-programmes-sidebar a.active:hover,
+.phy-programmes-sidebar a.active:focus-visible {
+  background: #8b0000;
+  color: #fff;
+}
+
+.phy-programmes-content {
+  min-height: 820px;
+  padding: 48px 24px 90px;
+  background: #fff;
+  border: 1px solid #d8d8d8;
+  box-shadow: 8px 0 7px rgba(0, 0, 0, 0.2);
+}
+
+.phy-programmes-content h1 {
+  margin: 0 0 34px;
+  color: #333;
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.programmes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.programme-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 24px;
+  background: #fafafa;
+}
+
+.programme-card h2 {
+  margin: 0 0 12px;
+  color: #8b0000;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.programme-meta {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: #555;
+}
+
+.programme-card p {
+  margin: 0;
+  font-size: 14px;
+  color: #444;
+  line-height: 1.7;
+  text-align: justify;
+}
+
+@media (max-width: 900px) {
+  .phy-programmes-shell {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding: 16px 14px 42px;
+  }
+
+  .phy-programmes-sidebar nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .phy-programmes-content {
+    min-height: auto;
+    padding: 34px 16px;
+  }
+
+  .phy-programmes-content h1 {
+    font-size: 30px;
+  }
+}
