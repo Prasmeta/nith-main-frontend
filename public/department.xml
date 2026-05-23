@@ -1,0 +1,34 @@
+<department>
+  <title>Department of Mathematics &amp; Scientific Computing</title>
+  <info>
+    <description>
+      The Department of Mathematics &amp; Scientific Computing (MNC) focuses on
+      advanced mathematical sciences, computational methods, and interdisciplinary research.
+    </description>
+    <description>
+      The department provides rigorous training in mathematics, statistics, and scientific computing,
+      preparing students for careers in academia, data science, industry, and research.
+    </description>
+  </info>
+  <programme>
+    <name>B.Sc. / B.Tech. (Maths &amp; Computing)</name>
+    <icon>🎓</icon>
+    <details>
+      Undergraduate programme combining mathematics and computational techniques.
+    </details>
+  </programme>
+  <programme>
+    <name>M.Sc.</name>
+    <icon>📚</icon>
+    <details>
+      Postgraduate programme in advanced mathematics and applications.
+    </details>
+  </programme>
+  <programme>
+    <name>Ph.D.</name>
+    <icon>🔬</icon>
+    <details>
+      Research leading to a doctoral degree in mathematics and scientific computing.
+    </details>
+  </programme>
+</department>

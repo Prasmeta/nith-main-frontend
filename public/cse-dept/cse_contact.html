@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact - CSE Department</title>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size:14px;
+      background:#f5f5f5;
+      color:#222;
+    }
+
+    /* ───────── ACCESSIBILITY BAR ───────── */
+
+    .access-bar{
+      background:#fff;
+      border-bottom:1px solid #ccc;
+      padding:4px 12px;
+      font-size:12px;
+      font-family:Arial, sans-serif;
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+      align-items:center;
+    }
+
+    .access-bar a{
+      color:#333;
+      text-decoration:none;
+    }
+
+    .access-bar a:hover{
+      text-decoration:underline;
+    }
+
+    .lang-select{
+      margin-left:auto;
+      font-size:12px;
+      padding:2px 4px;
+      border:1px solid #aaa;
+    }
+
+    /* ───────── HEADER (SAME AS PREVIOUS PAGE) ───────── */
+
+    header{
+      background:#7a0000;
+      color:#fff;
+
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+
+      padding:10px 20px;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .header-left{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+
+    .logo-circle{
+      width:72px;
+      height:72px;
+      border-radius:50%;
+      overflow:hidden;
+      border:3px solid #fff;
+      background:#fff;
+      flex-shrink:0;
+    }
+
+    .logo-circle img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .institute-name .hindi{
+      font-size:18px;
+      font-weight:bold;
+      letter-spacing:1px;
+    }
+
+    .institute-name .sub{
+      font-size:11px;
+      color:#f0c0c0;
+    }
+
+    .institute-name .english{
+      font-size:16px;
+      font-weight:bold;
+      margin-top:2px;
+    }
+
+    .institute-name .tagline{
+      font-size:11px;
+      color:#f0c0c0;
+    }
+
+    .header-right{
+      display:flex;
+      flex-direction:column;
+      align-items:flex-end;
+      gap:8px;
+    }
+
+    .social-icons{
+      display:flex;
+      gap:8px;
+    }
+
+    .social-icons a{
+      width:28px;
+      height:28px;
+      border:1px solid #fff;
+      border-radius:3px;
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      font-family:Arial, sans-serif;
+    }
+
+    .search-box{
+      display:flex;
+      align-items:center;
+    }
+
+    .search-box input{
+      padding:4px 8px;
+      font-size:12px;
+      border:none;
+      width:160px;
+      outline:none;
+    }
+
+    .search-box button{
+      background:#fff;
+      border:none;
+      padding:4px 8px;
+      cursor:pointer;
+    }
+
+    /* ───────── NAVBAR (SAME AS PREVIOUS PAGE) ───────── */
+
+    nav{
+      background:#1a3a5c;
+      display:flex;
+      flex-wrap:wrap;
+    }
+
+    nav a{
+      color:#fff;
+      text-decoration:none;
+      padding:12px 18px;
+      font-size:13px;
+      font-family:Arial, sans-serif;
+      border-right:1px solid rgba(255,255,255,0.15);
+    }
+
+    nav a:hover{
+      background:rgba(255,255,255,0.15);
+    }
+
+    /* ───────── LAYOUT ───────── */
+
+    .main-wrap{
+      max-width:1100px;
+      margin:18px auto;
+      display:flex;
+      padding:0 12px;
+    }
+
+    aside{
+      width:200px;
+      flex-shrink:0;
+    }
+
+    .sidebar-menu{
+      border:1px solid #ccc;
+      background:#fff;
+    }
+
+    .sidebar-menu a{
+      display:block;
+      padding:8px 14px;
+      color:#7a0000;
+      text-decoration:none;
+      font-size:13px;
+      font-family:Arial;
+      border-bottom:1px solid #eee;
+    }
+
+    .sidebar-menu a:hover{
+      background:#f9f0f0;
+    }
+
+    .sidebar-menu a.active{
+      background:#1a3a5c;
+      color:white;
+      font-weight:bold;
+    }
+
+    /* ───────── CONTENT (CENTERED) ───────── */
+
+    .content{
+      flex:1;
+      background:#fff;
+      border:1px solid #ccc;
+      margin-left:14px;
+      padding:40px 20px;
+      min-height:600px;
+
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+    }
+
+    .contact-box{
+      max-width:650px;
+      font-family:Arial, sans-serif;
+      line-height:1.8;
+    }
+
+    .contact-box h2{
+      color:#7a0000;
+      margin-bottom:20px;
+      font-weight:normal;
+    }
+
+    .label{
+      font-weight:bold;
+      color:#1a3a5c;
+    }
+
+    /* ───────── FOOTER (SAME AS PREVIOUS PAGE) ───────── */
+
+    footer{
+      background:#1a3a5c;
+      color:#ccc;
+      text-align:center;
+      padding:14px;
+      font-size:12px;
+      font-family:Arial, sans-serif;
+      margin-top:24px;
+    }
+
+  </style>
+</head>
+
+<body data-cse-page="contact">
+
+<!-- ACCESSIBILITY BAR -->
+<div class="access-bar">
+
+  <a href="#">A+</a>
+  <a href="#">A</a>
+  <a href="#">A-</a>
+
+  <span>|</span>
+
+  <a href="#">🌙 Toggle Contrast</a>
+  <a href="#">Grey Scale</a>
+  <a href="#">🔗 Links</a>
+  <a href="#">☀️ Light Mode</a>
+  <a href="#">↺ Reset</a>
+
+  <span>|</span>
+
+  <a href="#">🏠 Home</a>
+  <a href="#">📋 Intranet</a>
+  <a href="#">✉️ eOffice</a>
+  <a href="#">📞 Directory</a>
+  <a href="#">📬 Contact Us</a>
+  <a href="#">👤 Faculty Portfolio</a>
+
+  <select class="lang-select">
+    <option>English</option>
+    <option>हिन्दी</option>
+  </select>
+
+</div>
+
+<!-- HEADER (UNCHANGED FROM PREVIOUS PAGE) -->
+<header>
+
+  <div class="header-left">
+
+    <div class="logo-circle">
+      <img src="/logo.png" alt="Logo">
+    </div>
+
+    <div class="institute-name">
+
+      <div class="hindi">
+        राष्ट्रीय प्रौद्योगिकी संस्थान हमीरपुर
+      </div>
+
+      <div class="sub">
+        (एक राष्ट्रीय महत्व का संस्थान)
+      </div>
+
+      <div class="english">
+        National Institute of Technology Hamirpur
+      </div>
+
+      <div class="tagline">
+        (An Institute of National Importance)
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="header-right">
+
+    <div class="social-icons">
+      <a href="#">f</a>
+      <a href="#">𝕏</a>
+      <a href="#">in</a>
+      <a href="#">📷</a>
+    </div>
+
+    <div class="search-box">
+      <input type="text" placeholder="Search for">
+      <button>🔍</button>
+    </div>
+
+  </div>
+
+</header>
+
+<!-- NAVBAR (UNCHANGED) -->
+<nav>
+  <a href="#">About NITH</a>
+  <a href="#">Authorities</a>
+  <a href="#">Administration</a>
+  <a href="#">Departments</a>
+  <a href="#">Academics</a>
+  <a href="#">Student</a>
+  <a href="#">Faculty</a>
+  <a href="#">Alumni</a>
+  <a href="#">Downloads</a>
+</nav>
+
+<!-- MAIN -->
+<div class="main-wrap">
+
+  <!-- SIDEBAR -->
+  <aside>
+    <div class="sidebar-menu">
+      <a href="#">About us</a>
+      <a href="#">Vision & Mission</a>
+      <a href="#">Faculty</a>
+      <a href="#">Staff</a>
+      <a href="#">Programme Offered</a>
+      <a href="#">Labs</a>
+      <a href="#">Research Publications</a>
+      <a href="#" class="active">Contact</a>
+    </div>
+  </aside>
+
+  <!-- CONTENT (CENTERED) -->
+  <div class="content">
+
+    <div class="contact-box">
+
+      <h2>Contact Information</h2>
+
+      <p><span class="label">Dr. Siddhartha Chauhan</span></p>
+      <p>Head of Department</p>
+      <p>Computer Science & Engineering</p>
+      <p>National Institute of Technology Hamirpur</p>
+      <p>Himachal Pradesh, Pin No. 177005, India.</p>
+
+      <br>
+
+      <p><span class="label">Phone No.:</span> +91-1972 -254400</p>
+      <p><span class="label">HoD Email:</span> head.cse@nith.ac.in</p>
+      <p><span class="label">Office Email:</span> office.cse@nith.ac.in</p>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- FOOTER (UNCHANGED) -->
+<footer>
+  &copy; 2026 All Rights Reserved.
+</footer>
+
+  <script src="cse-api.js"></script>
+  <script src="cse-bind.js"></script>
+</body>
+</html>

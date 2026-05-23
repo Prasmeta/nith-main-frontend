@@ -3,7 +3,6 @@ import './phy_faculty.css'
 
 const menuItems = [
   { label: 'About Us', href: '/faculty-section/department/phy' },
-  { label: 'Vision & Mission', href: '/faculty-section/department/phy/vision-mission' },
   { label: 'Faculty', href: '/faculty-section/department/phy/faculty', active: true },
   { label: 'Staff', href: '/faculty-section/department/phy/staff' },
   { label: 'Programme Offered', href: '/faculty-section/department/phy/programme-offered' },

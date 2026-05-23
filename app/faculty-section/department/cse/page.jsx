@@ -296,10 +296,6 @@ function App() {
           Staff
         </a>
 
-        <a href="#" style={styles.sidebarLink}>
-          Programme Offered
-        </a>
-
         <a href="/faculty-section/department/cse/labs" style={styles.sidebarLink}>
           Labs
         </a>

@@ -3,7 +3,6 @@ import './msc_contact.css'
 
 const menuItems = [
   { label: 'About Us', href: '/faculty-section/department/msc' },
-  { label: 'Vision & Mission', href: '/faculty-section/department/msc/vision-mission' },
   { label: 'Faculty', href: '/faculty-section/department/msc/faculty' },
   { label: 'Staff', href: '/faculty-section/department/msc/staff' },
   { label: 'Programme Offered', href: '/faculty-section/department/msc/programmes' },
