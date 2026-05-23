@@ -18,7 +18,7 @@ const departmentData = [
           {
             title: 'Computer Science & Engineering',
             title2: 'कंप्यूटर विज्ञान और इंजीनियरिंग',
-            href: '#',
+            href: '/faculty-section/department/cse',
           },
           {
             title: 'Civil Engineering',
@@ -48,7 +48,7 @@ const departmentData = [
           {
             title: 'Material Science & Engineering',
             title2: 'पदार्थ विज्ञान और इंजीनियरिंग',
-            href: '#',
+            href: '/faculty-section/department/msc',
           },
         ],
       },
@@ -67,17 +67,17 @@ const departmentData = [
           {
             title: 'Chemistry',
             title2: 'रसायन विज्ञान',
-            href: '#',
+            href: '/faculty-section/department/chem',
           },
           {
             title: 'Mathematics & Scientific Computing',
             title2: 'गणित और वैज्ञानिक कंप्यूटिंग',
-            href: '#',
+            href: '/faculty-section/department/mnc',
           },
           {
             title: 'Physics & Photonics Science',
             title2: 'भौतिकी और फोटोनिक्स विज्ञान',
-            href: '#',
+            href: '/faculty-section/department/phy',
           },
         ],
       },

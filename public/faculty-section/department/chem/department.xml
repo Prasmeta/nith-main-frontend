@@ -1,0 +1,37 @@
+<department>
+  <title>Department of Chemistry</title>
+
+  <info>
+    <description>
+      The Department of Chemistry became an independent department in August 2009. It offers UG and PG courses for engineering departments, along with Ph.D. programs in various areas of chemistry.
+    </description>
+
+    <description>
+      Since 2016-17, the department has offered an M.Tech. in Chemical Technology in collaboration with the Chemical Engineering department, and since 2017-18, an M.Sc. in Chemistry.
+    </description>
+  </info>
+
+  <programme>
+    <name>B.Tech</name>
+    <icon>🎓</icon>
+    <details>
+      Four-year undergraduate programme focusing on core foundations and emerging tech trends.
+    </details>
+  </programme>
+
+  <programme>
+    <name>M.Tech</name>
+    <icon>🔬</icon>
+    <details>
+      Postgraduate programme in Chemical Technology in collaboration with the Chemical Engineering department.
+    </details>
+  </programme>
+
+  <programme>
+    <name>Ph.D</name>
+    <icon>🧪</icon>
+    <details>
+      Advanced doctoral research programs in various areas of chemistry.
+    </details>
+  </programme>
+</department>

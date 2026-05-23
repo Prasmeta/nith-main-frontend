@@ -7,6 +7,10 @@ import {
   Network,
 } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import chemDeptImage from './chem_dept.jpg'
+
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000'
 
 const academicProgrammes = [
   {
@@ -150,32 +154,81 @@ const styles = {
 
 function App() {
   const [departmentData, setDepartmentData] = useState(null)
+  const [programmesData, setProgrammesData] = useState(academicProgrammes)
+  const language = useSelector((state) => state.language.value)
+  const isHindi = language !== 'en'
 
   useEffect(() => {
-    fetch('/department.xml')
-      .then((response) => response.text())
-      .then((xmlText) => {
-        const parser = new DOMParser()
-        const xml = parser.parseFromString(xmlText, 'text/xml')
+    const loadFromXmlFallback = () => {
+      fetch('/faculty-section/department/chem/department.xml')
+        .then((response) => response.text())
+        .then((xmlText) => {
+          const parser = new DOMParser()
+          const xml = parser.parseFromString(xmlText, 'text/xml')
 
-        const title = xml.querySelector('title')?.textContent || ''
+          const title = xml.querySelector('title')?.textContent || ''
 
-        const descriptions = [...xml.querySelectorAll('info description')]
-          .map((item) => item.textContent)
+          const descriptions = [...xml.querySelectorAll('info description')]
+            .map((item) => item.textContent)
 
-        const programmes = [...xml.querySelectorAll('programme')].map((item) => ({
-          name: item.querySelector('name')?.textContent || '',
-          icon: item.querySelector('icon')?.textContent || '',
-          details: item.querySelector('details')?.textContent || '',
-        }))
+          setDepartmentData({
+            title,
+            descriptions,
+          })
+        })
+        .catch(() => {
+          setDepartmentData({
+            title: 'Department of Chemistry',
+            descriptions: [],
+          })
+        })
+    }
+
+    Promise.all([
+      fetch(`${API_BASE}/v1/departments/chem?language=${language}`, { cache: 'no-store' }),
+      fetch(`${API_BASE}/v1/departments/chem/programmes?language=${language}`, { cache: 'no-store' }),
+    ])
+      .then(async ([deptRes, programmeRes]) => {
+        if (!deptRes.ok || !programmeRes.ok) {
+          throw new Error('Backend response not OK')
+        }
+
+        const deptJson = await deptRes.json()
+        const programmeJson = await programmeRes.json()
+        const dept = deptJson?.data || {}
 
         setDepartmentData({
-          title,
-          descriptions,
-          programmes,
+          title: isHindi
+            ? dept.intro_heading_hi || dept.intro_heading_en || 'Department of Chemistry'
+            : dept.intro_heading_en || dept.intro_heading_hi || 'Department of Chemistry',
+          descriptions: [
+            isHindi ? dept.intro_description_hi : dept.intro_description_en,
+          ].filter(Boolean),
         })
+
+        const iconByName = {
+          'B.Tech': GraduationCap,
+          'M.Tech': Microscope,
+          'M.Sc': BookOpen,
+          'Ph.D': Network,
+        }
+
+        const mapped = (programmeJson?.data || []).map((item) => ({
+          name: isHindi
+            ? item.title_hi || item.title_en || item.programme_type || 'Programme'
+            : item.title_en || item.title_hi || item.programme_type || 'Programme',
+          Icon: iconByName[item.title_en || item.title_hi || item.programme_type] || Network,
+          details: isHindi ? item.description_hi || '' : item.description_en || '',
+        }))
+
+        if (mapped.length > 0) {
+          setProgrammesData(mapped)
+        }
       })
-  }, [])
+      .catch(() => {
+        loadFromXmlFallback()
+      })
+  }, [language])
 
   if (!departmentData) {
     return (
@@ -190,34 +243,34 @@ function App() {
 
       {/* Left Sidebar */}
       <aside style={styles.sidebar}>
-        <span style={styles.sidebarActiveItem}>About Us</span>
+        <span style={styles.sidebarActiveItem}>{isHindi ? 'हमारे बारे में' : 'About Us'}</span>
 
         <a href="/faculty-section/department/chem/vision-mission" style={styles.sidebarLink}>
-          Vision & Mission
+          {isHindi ? 'दृष्टि और मिशन' : 'Vision & Mission'}
         </a>
 
         <a href="/faculty-section/department/chem/faculty" style={styles.sidebarLink}>
-          Faculty
+          {isHindi ? 'शिक्षक' : 'Faculty'}
         </a>
 
         <a href="/faculty-section/department/chem/staff" style={styles.sidebarLink}>
-          Staff
+          {isHindi ? 'कर्मचारी' : 'Staff'}
         </a>
 
         <a href="/faculty-section/department/chem/programme-offered" style={styles.sidebarLink}>
-          Programme Offered
+          {isHindi ? 'कार्यक्रम' : 'Programme Offered'}
         </a>
 
         <a href="/faculty-section/department/chem/labs" style={styles.sidebarLink}>
-          Labs
+          {isHindi ? 'प्रयोगशालाएं' : 'Labs'}
         </a>
 
         <a href="/faculty-section/department/chem/research-publications" style={styles.sidebarLink}>
-          Research Publications
+          {isHindi ? 'शोध प्रकाशन' : 'Research Publications'}
         </a>
 
         <a href="/faculty-section/department/chem/contact" style={styles.sidebarLink}>
-          Contact
+          {isHindi ? 'संपर्क' : 'Contact'}
         </a>
       </aside>
 
@@ -231,7 +284,7 @@ function App() {
 
           {/* Image */}
           <img
-            src="/faculty-section/department/chem/chem_dept.jpg"
+            src={chemDeptImage.src}
             alt="Chemistry Department"
             style={{
               width: '100%',
@@ -244,12 +297,14 @@ function App() {
 
           {/* Description */}
           <p style={styles.descriptionText}>
-            The Department of Chemistry became an independent department in August 2009. It offers UG and PG courses for engineering departments, along with Ph.D. programs in various areas of chemistry. Since 2016–17, the department has offered an M.Tech. in Chemical Technology in collaboration with the Chemical Engineering department, and since 2017–18, an M.Sc. in Chemistry. The department aims to expand and upgrade its PG programs to meet current industrial needs and encourages active industry participation in curriculum development and training.
+            {isHindi
+              ? 'रसायन विभाग अगस्त 2009 में एक स्वतंत्र विभाग बना। यह इंजीनियरिंग विभागों के लिए UG और PG पाठ्यक्रम, साथ ही रसायन के विभिन्न क्षेत्रों में Ph.D. कार्यक्रम प्रदान करता है। 2016–17 से, विभाग ने केमिकल इंजीनियरिंग विभाग के सहयोग से केमिकल टेक्नोलॉजी में M.Tech. शुरू किया, और 2017–18 से रसायन में M.Sc. प्रदान कर रहा है। विभाग औद्योगिक आवश्यकताओं को पूरा करने के लिए अपने PG कार्यक्रमों को बढ़ाने और अद्यतन करने का लक्ष्य रखता है।'
+              : 'The Department of Chemistry became an independent department in August 2009. It offers UG and PG courses for engineering departments, along with Ph.D. programs in various areas of chemistry. Since 2016–17, the department has offered an M.Tech. in Chemical Technology in collaboration with the Chemical Engineering department, and since 2017–18, an M.Sc. in Chemistry. The department aims to expand and upgrade its PG programs to meet current industrial needs and encourages active industry participation in curriculum development and training.'}
           </p>
 
           {/* Academic Programmes */}
           <h2 style={styles.sectionTitle}>
-            Academic Programmes
+            {isHindi ? 'शैक्षणिक कार्यक्रम' : 'Academic Programmes'}
           </h2>
 
           <div
@@ -261,7 +316,7 @@ function App() {
               marginBottom: '30px',
             }}
           >
-            {academicProgrammes.map((programme) => (
+            {programmesData.map((programme) => (
               <div
                 key={programme.name}
                 style={styles.programmeCard}

@@ -6,6 +6,9 @@ import {
   Network,
 } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000'
 
 const academicProgrammes = [
   {
@@ -149,32 +152,81 @@ const styles = {
 
 function App() {
   const [departmentData, setDepartmentData] = useState(null)
+  const [programmesData, setProgrammesData] = useState(academicProgrammes)
+  const language = useSelector((state) => state.language.value)
+  const isHindi = language !== 'en'
 
   useEffect(() => {
-    fetch('/department.xml')
-      .then((response) => response.text())
-      .then((xmlText) => {
-        const parser = new DOMParser()
-        const xml = parser.parseFromString(xmlText, 'text/xml')
+    const loadFromXmlFallback = () => {
+      fetch('/faculty-section/department/mnc/department.xml')
+        .then((response) => response.text())
+        .then((xmlText) => {
+          const parser = new DOMParser()
+          const xml = parser.parseFromString(xmlText, 'text/xml')
 
-        const title = xml.querySelector('title')?.textContent || ''
+          const title = xml.querySelector('title')?.textContent || ''
 
-        const descriptions = [...xml.querySelectorAll('info description')]
-          .map((item) => item.textContent)
+          const descriptions = [...xml.querySelectorAll('info description')]
+            .map((item) => item.textContent)
 
-        const programmes = [...xml.querySelectorAll('programme')].map((item) => ({
-          name: item.querySelector('name')?.textContent || '',
-          icon: item.querySelector('icon')?.textContent || '',
-          details: item.querySelector('details')?.textContent || '',
+          setDepartmentData({
+            title,
+            descriptions,
+          })
+        })
+        .catch(() => {
+          setDepartmentData({
+            title: 'Department of Mathematics & Scientific Computing',
+            descriptions: [],
+          })
+        })
+    }
+
+    Promise.all([
+      fetch(`${API_BASE}/v1/departments/mnc?language=${language}`, { cache: 'no-store' }),
+      fetch(`${API_BASE}/v1/departments/mnc/programmes?language=${language}`, { cache: 'no-store' }),
+    ])
+      .then(async ([deptRes, programmeRes]) => {
+        if (!deptRes.ok || !programmeRes.ok) {
+          throw new Error('Backend response not OK')
+        }
+
+        const deptJson = await deptRes.json()
+        const programmeJson = await programmeRes.json()
+
+        const dept = deptJson?.data || {}
+        setDepartmentData({
+          title: isHindi
+            ? dept.intro_heading_hi || dept.intro_heading_en || 'Department of Mathematics & Scientific Computing'
+            : dept.intro_heading_en || dept.intro_heading_hi || 'Department of Mathematics & Scientific Computing',
+          descriptions: [
+            isHindi ? dept.intro_description_hi : dept.intro_description_en,
+          ].filter(Boolean),
+        })
+
+        const iconByName = {
+          'B.Tech': GraduationCap,
+          'M.Tech': BookOpen,
+          'M.Sc': BookOpen,
+          'Ph.D': Network,
+        }
+
+        const mapped = (programmeJson?.data || []).map((item) => ({
+          name: isHindi
+            ? item.title_hi || item.title_en || item.programme_type || 'Programme'
+            : item.title_en || item.title_hi || item.programme_type || 'Programme',
+          Icon: iconByName[item.title_en || item.title_hi || item.programme_type] || Network,
+          details: isHindi ? item.description_hi || '' : item.description_en || '',
         }))
 
-        setDepartmentData({
-          title,
-          descriptions,
-          programmes,
-        })
+        if (mapped.length > 0) {
+          setProgrammesData(mapped)
+        }
       })
-  }, [])
+      .catch(() => {
+        loadFromXmlFallback()
+      })
+  }, [language])
 
   if (!departmentData) {
     return (
@@ -189,34 +241,34 @@ function App() {
 
       {/* Left Sidebar */}
       <aside style={styles.sidebar}>
-        <span style={styles.sidebarActiveItem}>About Us</span>
+        <span style={styles.sidebarActiveItem}>{isHindi ? 'हमारे बारे में' : 'About Us'}</span>
 
         <a href="/faculty-section/department/mnc/vision-and-mission" style={styles.sidebarLink}>
-          Vision & Mission
+          {isHindi ? 'दृष्टि और मिशन' : 'Vision & Mission'}
         </a>
 
         <a href="/faculty-section/department/mnc/faculty" style={styles.sidebarLink}>
-          Faculty
+          {isHindi ? 'शिक्षक' : 'Faculty'}
         </a>
 
         <a href="/faculty-section/department/mnc/staff" style={styles.sidebarLink}>
-          Staff
+          {isHindi ? 'कर्मचारी' : 'Staff'}
         </a>
 
         <a href="/faculty-section/department/mnc/programmes-offered" style={styles.sidebarLink}>
-          Programme Offered
+          {isHindi ? 'कार्यक्रम' : 'Programme Offered'}
         </a>
 
         <a href="/faculty-section/department/mnc/labs" style={styles.sidebarLink}>
-          Labs
+          {isHindi ? 'प्रयोगशालाएं' : 'Labs'}
         </a>
 
         <a href="/faculty-section/department/mnc/research-publications" style={styles.sidebarLink}>
-          Research Publications
+          {isHindi ? 'शोध प्रकाशन' : 'Research Publications'}
         </a>
 
         <a href="/faculty-section/department/mnc/contact" style={styles.sidebarLink}>
-          Contact
+          {isHindi ? 'संपर्क' : 'Contact'}
         </a>
       </aside>
 
@@ -231,11 +283,11 @@ function App() {
           {/* Department Image */}
           <div style={styles.imagePlaceholder}>
             <img
-              src="/mnc_dept.png"
+              src="/faculty-section/department/mnc/mnc_dept.png"
               alt="MNC Department"
               style={{
                 width: '100%',
-                height: '100%',
+                height: 'auto',
                 objectFit: 'cover',
                 borderRadius: '4px',
               }}
@@ -244,7 +296,7 @@ function App() {
 
           {/* Academic Programmes */}
           <h2 style={styles.sectionTitle}>
-            Academic Programmes
+            {isHindi ? 'शैक्षणिक कार्यक्रम' : 'Academic Programmes'}
           </h2>
 
           <div
@@ -256,7 +308,7 @@ function App() {
               marginBottom: '30px',
             }}
           >
-            {academicProgrammes.map((programme) => (
+            {programmesData.map((programme) => (
               <div
                 key={programme.name}
                 style={styles.programmeCard}
@@ -284,15 +336,19 @@ function App() {
           ))}
 
           <p style={styles.descriptionText}>
-            These programmes prepare students for careers in research, industry, and technology while promoting innovation, interdisciplinary learning, and academic excellence.
+            {isHindi
+              ? 'ये कार्यक्रम छात्रों को अनुसंधान, उद्योग और प्रौद्योगिकी में करियर के लिए तैयार करते हैं और नवाचार, अंतर्विषयी शिक्षा और शैक्षणिक उत्कृष्टता को बढ़ावा देते हैं।'
+              : 'These programmes prepare students for careers in research, industry, and technology while promoting innovation, interdisciplinary learning, and academic excellence.'}
           </p>
 
           <h2 style={styles.sectionTitle}>
-            Career Prospects and Industry Relevance
+            {isHindi ? 'कैरियर संभावनाएं और उद्योग प्रासंगिकता' : 'Career Prospects and Industry Relevance'}
           </h2>
 
           <p style={styles.descriptionText}>
-            Mathematics and Scientific Computing graduates have strong career opportunities in research, academia, IT, banking, data analytics, and R&D, supported by solid analytical and computational training.
+            {isHindi
+              ? 'गणित और वैज्ञानिक संगणना के स्नातकों के लिए अनुसंधान, शिक्षण, आईटी, बैंकिंग, डेटा विश्लेषण और आर एंड डी में मजबूत करियर अवसर उपलब्ध हैं।'
+              : 'Mathematics and Scientific Computing graduates have strong career opportunities in research, academia, IT, banking, data analytics, and R&D, supported by solid analytical and computational training.'}
           </p>
 
           {/* Stats Highlight Cards */}
@@ -345,7 +401,7 @@ function App() {
 
           {/* Top Recruiters Section */}
           <h2 style={styles.sectionTitle}>
-            Top Recruiters
+            {isHindi ? 'शीर्ष नियोजक' : 'Top Recruiters'}
           </h2>
 
           <div

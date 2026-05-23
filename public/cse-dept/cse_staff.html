@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Staff - CSE Department</title>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size:14px;
+      background:#f5f5f5;
+      color:#222;
+    }
+
+    /* ───────── ACCESSIBILITY BAR ───────── */
+
+    .access-bar{
+      background:#fff;
+      border-bottom:1px solid #ccc;
+      padding:4px 12px;
+      font-size:12px;
+      font-family:Arial, sans-serif;
+
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+      align-items:center;
+    }
+
+    .access-bar a{
+      color:#333;
+      text-decoration:none;
+    }
+
+    .access-bar a:hover{
+      text-decoration:underline;
+    }
+
+    .lang-select{
+      margin-left:auto;
+      font-size:12px;
+      padding:2px 4px;
+      border:1px solid #aaa;
+    }
+
+    /* ───────── HEADER ───────── */
+
+    header{
+      background:#7a0000;
+      color:#fff;
+
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+
+      padding:10px 20px;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .header-left{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+
+    .logo-circle{
+      width:72px;
+      height:72px;
+      border-radius:50%;
+      overflow:hidden;
+      border:3px solid #fff;
+      background:#fff;
+      flex-shrink:0;
+    }
+
+    .logo-circle img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .institute-name{
+      line-height:1.4;
+    }
+
+    .institute-name .hindi{
+      font-size:18px;
+      font-weight:bold;
+      letter-spacing:1px;
+    }
+
+    .institute-name .sub{
+      font-size:11px;
+      color:#f0c0c0;
+    }
+
+    .institute-name .english{
+      font-size:16px;
+      font-weight:bold;
+      margin-top:2px;
+    }
+
+    .institute-name .tagline{
+      font-size:11px;
+      color:#f0c0c0;
+    }
+
+    .header-right{
+      display:flex;
+      flex-direction:column;
+      align-items:flex-end;
+      gap:8px;
+    }
+
+    .social-icons{
+      display:flex;
+      gap:8px;
+    }
+
+    .social-icons a{
+      width:28px;
+      height:28px;
+      border:1px solid #fff;
+      border-radius:3px;
+      color:#fff;
+      font-size:13px;
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+
+      text-decoration:none;
+      font-family:Arial, sans-serif;
+    }
+
+    .search-box{
+      display:flex;
+      align-items:center;
+    }
+
+    .search-box input{
+      padding:4px 8px;
+      font-size:12px;
+      border:none;
+      width:160px;
+      outline:none;
+    }
+
+    .search-box button{
+      background:#fff;
+      border:none;
+      padding:4px 8px;
+      cursor:pointer;
+    }
+
+    /* ───────── NAVBAR ───────── */
+
+    nav{
+      background:#1a3a5c;
+      display:flex;
+      flex-wrap:wrap;
+    }
+
+    nav a{
+      color:#fff;
+      text-decoration:none;
+      padding:12px 18px;
+      font-size:13px;
+      font-family:Arial, sans-serif;
+      border-right:1px solid rgba(255,255,255,0.15);
+    }
+
+    nav a:hover{
+      background:rgba(255,255,255,0.15);
+    }
+
+    /* ───────── MAIN SECTION ───────── */
+
+    .main-wrap{
+      max-width:1100px;
+      margin:18px auto;
+      display:flex;
+      gap:0;
+      padding:0 12px;
+    }
+
+    /* ───────── SIDEBAR ───────── */
+
+    aside{
+      width:200px;
+      flex-shrink:0;
+    }
+
+    .sidebar-menu{
+      border:1px solid #ccc;
+      background:#fff;
+    }
+
+    .sidebar-menu .menu-title{
+      background:#fff;
+    color:#7a0000;
+    padding:8px 14px;
+    font-size:13px;
+    font-family:Arial, sans-serif;
+    font-weight:normal;
+    border-bottom:1px solid #eee;
+    }
+
+    .sidebar-menu a{
+      display:block;
+      padding:8px 14px;
+      color:#7a0000;
+      text-decoration:none;
+      font-size:13px;
+      font-family:Arial, sans-serif;
+      border-bottom:1px solid #eee;
+    }
+
+    .sidebar-menu a:hover{
+      background:#f9f0f0;
+      text-decoration:underline;
+    }
+
+    .sidebar-menu a.active{
+      background:#1a3a5c;
+    color:white;
+    font-weight:bold;
+    }
+
+    /* ───────── CONTENT ───────── */
+
+    .content{
+      flex:1;
+      background:#fff;
+      border:1px solid #ccc;
+      margin-left:14px;
+      padding:24px 28px;
+      min-height:600px;
+    }
+
+    .section{
+      margin-bottom:70px;
+    }
+
+    .section h2{
+      text-align:center;
+      color:#7a0000;
+      font-size:22px;
+      font-weight:normal;
+      margin-bottom:30px;
+      font-family:Arial, sans-serif;
+    }
+
+    .section p{
+      font-size:14px;
+      line-height:1.7;
+      color:#444;
+      margin-bottom:16px;
+      text-align:left;
+    }
+
+    /* ───────── FOOTER ───────── */
+
+    footer{
+      background:#1a3a5c;
+      color:#ccc;
+      text-align:center;
+      padding:14px;
+      font-size:12px;
+      font-family:Arial, sans-serif;
+      margin-top:24px;
+    }
+
+    /* ───────── MOBILE ───────── */
+
+    @media (max-width:700px){
+
+      .main-wrap{
+        flex-direction:column;
+      }
+
+      aside{
+        width:100%;
+      }
+
+      .content{
+        margin-left:0;
+        margin-top:14px;
+      }
+
+      header{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .header-right{
+        align-items:flex-start;
+      }
+    }
+    /* ───────── STAFF PAGE ───────── */
+
+    .staff-section{
+    margin-bottom:50px;
+    }
+
+    .staff-heading{
+    font-size:24px;
+    color:#7a0000;
+    margin-bottom:18px;
+    font-family:Arial, sans-serif;
+    font-weight:normal;
+    }
+
+    .staff-table{
+    width:100%;
+    border-collapse:collapse;
+    background:#fff;
+    font-family:Arial, sans-serif;
+    }
+
+    .staff-table th{
+    background:#1a3a5c;
+    color:white;
+    padding:14px;
+    text-align:left;
+    font-size:14px;
+    }
+
+    .staff-table td{
+    border:1px solid #ddd;
+    padding:14px;
+    font-size:14px;
+    line-height:1.6;
+    }
+
+    .staff-table tr:nth-child(even){
+    background:#f7f7f7;
+    }
+
+    .staff-table tr:hover{
+    background:#f0f4fa;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- ACCESSIBILITY BAR -->
+
+  <div class="access-bar">
+
+    <a href="#">A+</a>
+    <a href="#">A</a>
+    <a href="#">A-</a>
+
+    <span>|</span>
+
+    <a href="#">🌙 Toggle Contrast</a>
+    <a href="#">Grey Scale</a>
+    <a href="#">🔗 Links</a>
+    <a href="#">☀️ Light Mode</a>
+    <a href="#">↺ Reset</a>
+
+    <span>|</span>
+
+    <a href="#">🏠 Home</a>
+    <a href="#">📋 Intranet</a>
+    <a href="#">✉️ eOffice</a>
+    <a href="#">📞 Directory</a>
+    <a href="#">📬 Contact Us</a>
+    <a href="#">👤 Faculty Portfolio</a>
+
+    <select class="lang-select">
+      <option>English</option>
+      <option>हिन्दी</option>
+    </select>
+
+  </div>
+
+  <!-- HEADER -->
+
+  <header>
+
+    <div class="header-left">
+
+      <div class="logo-circle">
+        <img src="/logo.png" alt="Logo">
+      </div>
+
+      <div class="institute-name">
+
+        <div class="hindi">
+          राष्ट्रीय प्रौद्योगिकी संस्थान हमीरपुर
+        </div>
+
+        <div class="sub">
+          (एक राष्ट्रीय महत्व का संस्थान)
+        </div>
+
+        <div class="english">
+          National Institute of Technology Hamirpur
+        </div>
+
+        <div class="tagline">
+          (An Institute of National Importance)
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="header-right">
+
+      <div class="social-icons">
+        <a href="#">f</a>
+        <a href="#">𝕏</a>
+        <a href="#">in</a>
+        <a href="#">📷</a>
+      </div>
+
+      <div class="search-box">
+        <input type="text" placeholder="Search for">
+        <button>🔍</button>
+      </div>
+
+    </div>
+
+  </header>
+
+  <!-- NAVBAR -->
+
+  <nav>
+
+    <a href="#">About NITH</a>
+    <a href="#">Authorities</a>
+    <a href="#">Administration</a>
+    <a href="#">Departments</a>
+    <a href="#">Academics</a>
+    <a href="#">Student</a>
+    <a href="#">Faculty</a>
+    <a href="#">Alumni</a>
+    <a href="#">Downloads</a>
+
+  </nav>
+
+  <!-- MAIN CONTENT -->
+
+<div class="main-wrap">
+
+  <!-- SIDEBAR -->
+
+  <aside>
+
+    <div class="sidebar-menu">
+
+      <div class="menu-title">
+        About Us
+      </div>
+
+      <a href="#">Vision &amp; Mission</a>
+      <a href="#">Faculty</a>
+      <a href="#" class="active">Staff</a>
+      <a href="#">Programme Offered</a>
+      <a href="#">Labs</a>
+      <a href="#">Research Publications</a>
+      <a href="#">Contact</a>
+
+    </div>
+
+  </aside>
+
+  <!-- CONTENT -->
+
+  <div class="content">
+
+    <h1 style="
+      text-align:center;
+      font-family:Arial, sans-serif;
+      color:#7a0000;
+      margin-bottom:30px;
+      font-size:28px;
+      font-weight:normal;
+    ">
+      Staff
+    </h1>
+
+    <!-- OFFICE STAFF -->
+
+    <div class="staff-section">
+
+      <h2 class="staff-heading">
+        Office Staff
+      </h2>
+
+      <table class="staff-table">
+
+        <tr>
+          <th>Sl. No.</th>
+          <th>Name</th>
+          <th>Designation</th>
+          <th>Phone No.</th>
+          <th>Email</th>
+        </tr>
+
+        <tr>
+          <td>1</td>
+          <td>Piyush Pathania</td>
+          <td>Jr. Assistant</td>
+          <td>254402</td>
+          <td>-</td>
+        </tr>
+
+        <tr>
+          <td>2</td>
+          <td>Joginder Singh</td>
+          <td>Attendant</td>
+          <td>254402</td>
+          <td>-</td>
+        </tr>
+
+      </table>
+
+    </div>
+
+    <!-- TECHNICAL STAFF -->
+
+    <div class="staff-section">
+
+      <h2 class="staff-heading">
+        Technical Staff
+      </h2>
+
+      <table class="staff-table">
+
+        <tr>
+          <th>Sl. No.</th>
+          <th>Name</th>
+          <th>Designation</th>
+          <th>Phone No.</th>
+          <th>Email</th>
+        </tr>
+
+        <tr>
+          <td>1</td>
+          <td>Sh. Sanjeev Kumar</td>
+          <td>Sr. Technical Assistant</td>
+          <td>254407</td>
+          <td>-</td>
+        </tr>
+
+        <tr>
+          <td>2</td>
+          <td>Sh. Jiwan Kumar</td>
+          <td>Senior Technician</td>
+          <td>254405</td>
+          <td>-</td>
+        </tr>
+
+        <tr>
+          <td>3</td>
+          <td>Sh. Anurag Dhiman</td>
+          <td>Technician</td>
+          <td>-</td>
+          <td>-</td>
+        </tr>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+  &copy; 2026 All Rights Reserved.
+</footer>
+
+</body>
+</html>
